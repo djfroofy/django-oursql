@@ -169,6 +169,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
             # self.connection.encoders[SafeString] = self.connection.encoders[str]
             connection_created.send(sender=self.__class__)
         cursor = CursorWrapper(self.connection.cursor())
+        cursor.execute("set autocommit='OFF'")
         return cursor
 
     def _rollback(self):
